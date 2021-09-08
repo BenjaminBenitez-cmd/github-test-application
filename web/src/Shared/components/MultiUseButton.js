@@ -1,8 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addBookmark, deleteBookmark } from "../../redux/Bookmark.slice";
 
 const MultiUseButton = ({ buttonType, values }) => {
   const dispatch = useDispatch();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const bookmarks = useSelector((state) => state.bookmarks.bookmarks);
+
+  const checkIfIsBookmarked = useCallback((id, bookmarks) => {
+    const isAvailable = bookmarks.find((node) => node.id === id);
+    return isAvailable ? setIsBookmarked(true) : setIsBookmarked(false);
+  }, []);
+
+  useEffect(() => {
+    if (bookmarks.length <= 0) return;
+    checkIfIsBookmarked(values.id, bookmarks);
+  }, [values.id, bookmarks, checkIfIsBookmarked]);
 
   switch (buttonType) {
     case "add":
@@ -10,8 +23,9 @@ const MultiUseButton = ({ buttonType, values }) => {
         <button
           className="repo_bookmark"
           onClick={() => dispatch(addBookmark(values))}
+          disabled={isBookmarked}
         >
-          Bookmark
+          {isBookmarked ? "Bookmarked" : "Bookmark"}
         </button>
       );
 

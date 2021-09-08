@@ -14,7 +14,7 @@ const Card = (props) => {
       </div>
       <p>{props.description}</p>
       <div className="repo_details">
-        <div className="stars">⭐ {props.stars}</div>
+        <div className="stars">⭐ {props.watchers}</div>
         <div className="forks">🍴 {props.forks}</div>
       </div>
     </div>
