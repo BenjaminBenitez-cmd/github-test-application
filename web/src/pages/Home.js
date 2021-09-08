@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getBookmarks } from "../redux/Bookmark.slice";
 import { updateQuery } from "../redux/Query.slice";
 import { updateRepositories } from "../redux/Repository.slice";
 import Card from "../Shared/components/Card";
@@ -21,6 +22,7 @@ const Home = () => {
   useEffect(() => {
     if (query) return;
     dispatch(updateRepositories("React"));
+    dispatch(getBookmarks());
   }, [dispatch, query]);
 
   return (
