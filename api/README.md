@@ -23,6 +23,6 @@ You will also see any lint errors in the console.
 Builds the app for production to the `build` folder.\
 The server is not ready to be started via `npm start:production`
 
-### `npm start:production`
+### `npm run start:production`
 
 Launches the application in production mode
